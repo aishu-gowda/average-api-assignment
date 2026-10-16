@@ -49,16 +49,16 @@ assesment aish api/
 
 Clone the repository and open its directory:
 
-bash
-git clone YOUR_GITHUB_REPOSITORY_URL
-cd YOUR_REPOSITORY_FOLDER
 
+git clone https://github.com/aishu-gowda/average-api-assignment.git
+cd average-api-assignment
+npm install
 
 No additional packages are required for the current implementation because it uses Node.js built-in modules.
 
 ## Run the Application
 
-bash
+
 npm start
 
 
@@ -93,7 +93,7 @@ Submit more numbers to update the running average.
 
 ### Error Responses
 
-- 400 Bad Reques` — invalid JSON or invalid number
+- 400 Bad Request — invalid JSON or invalid number
 - 404 Not Found — unknown route
 
 ### Important Note
@@ -102,7 +102,7 @@ Submitted numbers are stored in memory. They reset whenever the server restarts.
 
 ## Run Tests
 
-bash
+
 npm test
 
 
