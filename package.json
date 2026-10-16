@@ -1,0 +1,19 @@
+{
+  "name": "average-api-assignment",
+  "version": "1.0.0",
+  "description": "A REST API that calculates the running average of submitted numbers",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test",
+    "prepare": "husky"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
+    "husky": "^9.1.7"
+  }
+}

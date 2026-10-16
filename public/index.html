@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Average Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3e8ff;
+            text-align: center;
+            padding: 50px 15px;
+        }
+
+        .container {
+            background: white;
+            max-width: 400px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        input, button {
+            padding: 12px;
+            margin: 8px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #7c3aed;
+            color: white;
+            cursor: pointer;
+        }
+
+        #message {
+            color: #b91c1c;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Average Calculator</h1>
+
+        <p>Enter a number to calculate the running average.</p>
+
+        <input
+            type="number"
+            id="numberInput"
+            placeholder="Enter a number"
+            step="any"
+        >
+
+        <button id="addButton">Add Number</button>
+
+        <h2>Average: <span id="average">0</span></h2>
+        <p>Total numbers: <span id="count">0</span></p>
+
+        <p id="message"></p>
+    </div>
+
+    <script>
+        const numberInput = document.getElementById("numberInput");
+        const addButton = document.getElementById("addButton");
+        const averageDisplay = document.getElementById("average");
+        const countDisplay = document.getElementById("count");
+        const message = document.getElementById("message");
+
+        addButton.addEventListener("click", async function () {
+            const number = numberInput.value;
+
+            if (number.trim() === "") {
+                message.textContent = "Please enter a number.";
+                return;
+            }
+
+            try {
+                const response = await fetch("/average", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        number: Number(number)
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || "Something went wrong.");
+                }
+
+                averageDisplay.textContent = data.average;
+                countDisplay.textContent = data.count;
+                message.textContent = "Number added successfully!";
+                numberInput.value = "";
+            } catch (error) {
+                message.textContent =
+                    "Could not connect to the server. Please try again.";
+            }
+        });
+    </script>
+</body>
+</html>
